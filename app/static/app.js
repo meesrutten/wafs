@@ -16,6 +16,7 @@
         sections.toggle(location.hash.substr(1));
       }
 
+      // Listing to hashchange
       window.addEventListener("hashchange",function(){
         var route = location.hash.substr(1);
         sections.toggle(route);
