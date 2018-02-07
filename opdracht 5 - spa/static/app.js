@@ -11,8 +11,13 @@
   // Handle routes and states
   var routers = {
     init: function() {
-      window.addEventListener("hashchange",function(event){
-        var route = location.hash.substr(1);;
+      // Check if the window already has a hash and change active sections corspodending the hash
+      if (window.location.hash) {
+        sections.toggle(location.hash.substr(1));
+      }
+
+      window.addEventListener("hashchange",function(){
+        var route = location.hash.substr(1);
         sections.toggle(route);
       });
     }
@@ -24,8 +29,9 @@
     toggle: function(route) {
       for (let i = 0; i < this.sections.length; i++) {
         this.sections[i].classList.remove("active");
+        // Checking if the id is the same as the route
         if (this.sections[i].id == route) {
-          this.sections[i].classList.add("active")
+          this.sections[i].classList.add("active");
         }
       }
     }
