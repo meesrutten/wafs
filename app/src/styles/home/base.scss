@@ -1,0 +1,35 @@
+:root {
+    --font-stack: normal 1rem/1.5 'Montserrat', sans-serif;
+    --font-title: bold 2rem/2 'Montserrat', sans-serif;
+
+    --scroll-indicator-height: .25em; 
+
+    --color: #3d50b4;
+    --color-shadow: #14a092;
+}
+
+/*  */
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+html {
+    /* Sets standard font */
+    font: var(--font-stack);
+    /* Sets standard font-size */
+    font-size: 1rem;
+}
+
+html, body {
+    margin: 0;
+	padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+	height: 100vh;
+}
