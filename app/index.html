@@ -16,19 +16,29 @@
   <section id="popular">
     <h1>Popular Movies</h1>
     <ul id="popularMovies">
-      <li><a class="title"></a></li>
+      <li><a data-bind="title"></a></li>
     </ul>
   </section>
   <section id="movieDetail">
-    <h1 id="movieTitle">sdfsdf</h1>
+    <h1>Movie Detail</h1>
+    <section id="movieDetails">
+      <h3 data-bind="title"></h3>
+      <img data-bind="poster_path">
+      <h4>Overview</h4>
+      <p data-bind="overview"></p>
+      <h4>Genres</h4>
+      <ul data-bind="genres">
+        <li data-bind="name"></li>
+      </ul>
+    </section>
   </section>
   <nav>
     <li><a href="#start">Start</a></li>
     <li><a href="#popular">Popular Movies</a></li>
+    <li id="backButton"><a href="#popular">Back</a></li>
   </nav>
   <script src="static/routie.js"></script>
   <script src="static/transparency.min.js"></script>
-  <script src="static/jquery.min.js"></script>
   <script src="static/app.js"></script>
 </body>
 </html>
