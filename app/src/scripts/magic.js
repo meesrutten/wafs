@@ -1,7 +1,7 @@
-import animations from './animations';
+import * as animations from './magic/index';
 
 function Magic(node, animationName) {
-	
+
 	const transitions = animations;
 
 	return function () {
