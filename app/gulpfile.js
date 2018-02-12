@@ -3,6 +3,7 @@ var browserSync = require('browser-sync');
 
 gulp.task('browser-sync', function () {
 	browserSync.init(['*.html', './static/styles.css'], {
+		https: true,
 		server: {
 			baseDir: './'
 		}

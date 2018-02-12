@@ -43,7 +43,7 @@
   }
 
   var xhr = {
-    apiBasisUrl: "http://api.themoviedb.org/3/movie/",
+    apiBasisUrl: "https://api.themoviedb.org/3/movie/",
     apiKey: "d9a167a57e748b4a804b41f0186b2339",
     data: {},
     request: function(apiSearchParm) {
@@ -90,7 +90,7 @@
           },
           poster_path: {
             src: function(params) {
-              return `http://image.tmdb.org/t/p/w185/${this.poster_path}`;
+              return `https://image.tmdb.org/t/p/w185/${this.poster_path}`;
             }
           }
         };
