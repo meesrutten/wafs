@@ -1,60 +1,46 @@
+import Magic from './magic.js'
 
-
-
-(function(){
+const App = (function(){
 	'strict mode'
-	this.startURL = window.location.hash
-	this.animationDuration = 200
-
-	this.init = () => {
-		this.routes.init()
+	let startURL
+	window.location.hash.length >= 1 ? startURL = window.location.hash : startURL = '#section_splash'
+	const init = () => {
+		routes.init()
 	}
-	this.routes = {
+	const routes = {
 		init: () => {
-			this.sections.toggle(startURL)
+			sections.toggle(startURL)
 			window.addEventListener('hashchange', (event) => {
-				const routeHash = this.getUrlParams(event.newURL)
-				const oldRouteHash = this.getUrlParams(event.oldURL)
-				this.sections.toggle(routeHash, oldRouteHash)
+				const routeHash = getUrlParams(event.newURL)
+				let oldRouteHash = getUrlParams(event.oldURL)
+				if (!oldRouteHash.includes('#')) {
+					oldRouteHash = startURL
+				}
+				sections.toggle(routeHash, oldRouteHash)
 			})
 		},
 	}
-	this.getUrlParams = (search) => {
+	const getUrlParams = (search) => {
 		let hashes = search.slice(search.lastIndexOf('#'))
 		return hashes
 	}
-	this.sections = {
+	const sections = {
 		toggle: (route, oldRoute) => {
-			if (typeof oldRoute !== 'undefined') {
+			console.log(route, oldRoute);
+			if (typeof oldRoute !== 'undefined' && oldRoute !== '/') {
 				const oldActiveSection = document.querySelector(oldRoute)
-				oldActiveSection.animate(this.animation.hide, this.animation.settingsHide)
+				const hide = new Magic(oldActiveSection, 'hide');
+				hide();
 			}
 			const newActiveSection = document.querySelector(route)
-			newActiveSection.animate(this.animation.show, this.animation.settingsShow)
+			//newActiveSection.animate(Magic.toggle.show, Magic.toggle.settingsShow)
+			const show = new Magic(newActiveSection, 'show');
+			show();
 		}
 	}
-	this.animation = {
-		settingsShow: {
-			duration: this.animationDuration,
-			iterations: 1,
-			easing: 'ease-out',
-			fill: 'forwards',
-			delay: this.animationDuration
-		},
-		settingsHide: {
-			duration: this.animationDuration,
-			iterations: 1,
-			easing: 'ease-in',
-			fill: 'forwards'
-		},
-		show: [ 
-			{ transform: 'scale(0)', opacity: 0 }, 
-			{ transform: 'scale(1)', opacity: 1 },
-		],
-		hide: [
-			{ transform: 'scale(1)', opacity: 1 },
-			{ transform: 'scale(0)', opacity: 0 } 
-		]
+	return {
+		init: init
 	}
-	this.init()
 })()
+
+App.init()

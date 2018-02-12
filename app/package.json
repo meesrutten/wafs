@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "babel-preset-env": "^1.6.1"
+  },
   "devDependencies": {
     "node-sass": "^4.7.2",
     "parcel-bundler": "^1.5.1",
