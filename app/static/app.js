@@ -84,6 +84,9 @@
       } else {
         var directives = {
           title: {
+            href: function (params) {
+              return `https://imdb.com/title/${this.imdb_id}`
+            },
             text: function (params) {
               return `${this.title}(${this.release_date.substring(0, 4)})`;
             }

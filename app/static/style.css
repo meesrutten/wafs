@@ -40,6 +40,10 @@ nav a {
   color: white;
 }
 
+a:visited {
+  color: inherit;
+}
+
 nav #backButton {
   display: none;
 }
