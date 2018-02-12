@@ -12,6 +12,6 @@ export default [
 		iterations: 1,
 		easing: 'ease-out',
 		fill: 'forwards',
-		delay: 300,
+		delay: 300
 	}
 ]

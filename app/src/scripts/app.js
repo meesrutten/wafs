@@ -30,12 +30,15 @@ const App = (function(){
 			if (typeof oldRoute !== 'undefined' && oldRoute !== '/') {
 				const oldActiveSection = document.querySelector(oldRoute)
 				const hide = new Magic(oldActiveSection, 'hide');
-				hide();
+				hide.play();
+				console.log(document.timeline);
 			}
 			const newActiveSection = document.querySelector(route)
 			//newActiveSection.animate(Magic.toggle.show, Magic.toggle.settingsShow)
 			const show = new Magic(newActiveSection, 'show');
-			show();
+			// console.log(show.id);
+			console.log(show);
+			show.play();
 		}
 	}
 	return {
