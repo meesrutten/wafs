@@ -4,7 +4,6 @@
   var app = {
     init: function() {
       routers.init();
-      xhr.request();
     },
     rootElement: document.body
   };
@@ -14,10 +13,15 @@
     init: function() {
       routie({
         'start': function() {
-          sections.toggle("start")
+          sections.toggle(arguments.callee.name);
         },
-        'best-practices': function() {
-          sections.toggle("best-practices")
+        'popular': function() {
+          sections.toggle(arguments.callee.name);
+          xhr.request("popular");
+        },
+        'movie/:movieId': function (movieId) {
+          console.log(movieId);
+          sections.toggle("movieDetail");
         }
       })
     }
@@ -25,43 +29,50 @@
 
   // Render / toggle sections
   var sections = {
-    sections: app.rootElement.querySelectorAll("body>section"),
+    sectionsElements: app.rootElement.querySelectorAll("body>section"),
     toggle: function(route) {
-      for (let i = 0; i < this.sections.length; i++) {
-        this.sections[i].classList.remove("active");
+      for (let i = 0; i < this.sectionsElements.length; i++) {
+        this.sectionsElements[i].classList.remove("active");
         // Checking if the id is the same as the route
-        if (this.sections[i].id == route) {
-          this.sections[i].classList.add("active");
+        if (this.sectionsElements[i].id == route) {
+          this.sectionsElements[i].classList.add("active");
         }
       }
     }
   }
 
-
   var xhr = {
-    apiBasisUrl: "http://api.themoviedb.org/3//movie/popular",
+    apiBasisUrl: "http://api.themoviedb.org/3/movie/",
     apiKey: "d9a167a57e748b4a804b41f0186b2339",
     data: {},
-    request: function() {
+    request: function(apiSearchParm) {
       var request = new XMLHttpRequest();
-      request.open('GET', `${this.apiBasisUrl}?api_key=${this.apiKey}`, true);
+      var _this = this;
+      request.open('GET', `${this.apiBasisUrl}${apiSearchParm}?api_key=${this.apiKey}`, true);
 
       request.onload = function() {
         if (request.status >= 200 && request.status < 400) {
          // Success!
-          this.data = JSON.parse(request.responseText);
-          console.log(this.data);
+         //TODO Change xhr to THIS
+          xhr.data = JSON.parse(request.responseText);
+          xhr.render();
         } else {
          // We reached our target server, but it returned an error
 
         }
       };
-
-      request.onerror = function() {
-       // There was a connection error of some sort
+      request.send();
+    },
+    render: function () {
+      var directives = {
+        title: {
+          href: function(params) {
+            return `#movie/${this.id}`;
+          }
+        }
       };
 
-      request.send();
+      Transparency.render(sections.sectionsElements[1].querySelector('#popularMovies'), this.data.results, directives);
     }
   }
 
