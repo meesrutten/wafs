@@ -32,13 +32,12 @@
   var sections = {
     sectionsElements: app.rootElement.querySelectorAll("body>section"),
     toggle: function(route) {
-      for (let i = 0; i < this.sectionsElements.length; i++) {
-        this.sectionsElements[i].classList.remove("active");
-        // Checking if the id is the same as the route
-        if (this.sectionsElements[i].id == route) {
-          this.sectionsElements[i].classList.add("active");
+      this.sectionsElements.forEach(function (el) {
+        el.classList.remove("active");
+        if (el.id == route) {
+          el.classList.add("active");
         }
-      }
+      });
     }
   }
 
