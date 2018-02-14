@@ -4,6 +4,7 @@
   const app = {
     init() {
       routers.init();
+      sections.init();
     },
     rootElement: document.body
   };
@@ -14,15 +15,15 @@
       // Make routie config and requesting a xhr if needed
       routie({
         start: function() {
-          sections.toggle(arguments.callee.name);
+          sections.toggle("start");
         },
         popular: function() {
-          sections.toggle(arguments.callee.name);
-          xhr.request("popular");
+          sections.toggle("popular", "popular");
+
         },
+        // vangt af wat er achter de movie/ staat en geeft dit mee als 2de parameter aan toggle
         "movie/:movieId": function (movieId) {
-          sections.toggle("movieDetail");
-          xhr.request(movieId);
+          sections.toggle("movieDetail", movieId);
         }
       });
     }
@@ -31,12 +32,30 @@
   // Render / toggle sections
   const sections = {
     sectionsElements: app.rootElement.querySelectorAll("body>section"),
-    toggle(route) {
+    init(){
+      // Een event listeren op het knopje, en voert nogmaals toggle uit voor referch van de pagina
+      this.sectionsElements[1].querySelector('#popular input').addEventListener("change",function () {
+        xhr.filterBadMovies = this.checked;
+        sections.toggle("popular", "popular");
+      });
+    },
+    toggle(route, routeId) {
+      /// Zet de juiste section op active
       this.sectionsElements.forEach(function (el) {
         el.classList.remove("active");
         if (el.id === route) {
           el.classList.add("active");
         }
+      });
+
+      // Gaat de pagina's vullen met data van de api
+      this.loadPage(route, routeId);
+    },
+    loadPage(route, routeId){
+      // Maakt een api request
+      xhr.request(routeId).then(function(){
+        // Rendert de pagina nadat de api call is gelukt
+        xhr.render(route, routeId);
       });
     }
   };
@@ -45,30 +64,42 @@
     apiBasisUrl: "https://api.themoviedb.org/3/movie/",
     apiKey: "d9a167a57e748b4a804b41f0186b2339",
     data: {},
-    request(apiSearchParm) {
-      var request = new XMLHttpRequest();
+    filterBadMovies: false,
+    request(apiSearchParm){
       var _this = this;
-      // Making the url and creating a GET request
-      var url = `${this.apiBasisUrl}${apiSearchParm}?api_key=${this.apiKey}`;
+      // Maakt een promise voor de xml request
+      var promise = new Promise(function(resolve, reject) {
+        var request = new XMLHttpRequest();
 
-      request.open('GET', url, true);
+        // Making the url and creating a GET request
+        var url = `${_this.apiBasisUrl}${apiSearchParm}?api_key=${_this.apiKey}`;
 
-      request.onload = function() {
-        if (request.status >= 200 && request.status < 400) {
-          // Success!
-          // TODO Change xhr to THIS
-          // Putting results into the data propoty and render page
-          xhr.data = JSON.parse(request.responseText);
-          xhr.render(apiSearchParm);
-        } else {
-          // We reached our target server, but it returned an error
-        }
-      };
-      request.send();
+        request.open('GET', url, true);
+
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // Zet de result json in het data atribuut
+            _this.data = JSON.parse(request.responseText);
+            resolve();
+          }
+        };
+        request.send();
+      });
+
+      return promise;
     },
-    render(apiSearchParm) {
+    render(route, apiSearchParm) {
       // Checking if it a popular Search or Movie detail page
-      if (apiSearchParm === "popular") {
+      if (xhr.filterBadMovies) {
+        // filtering if vote average is kleiner dan 6.5
+        this.data.results = this.data.results.filter(function(obj){
+          if (obj.vote_average > 6.5) {
+            return true;
+          }
+        });
+      }
+
+      if (route === "popular") {
         var directives = {
           title: {
             href: function(params) {
@@ -80,7 +111,7 @@
         var target = sections.sectionsElements[1].querySelector('#popularMovies');
         // Render Page
         Transparency.render(target, this.data.results, directives);
-      } else {
+      } else if (route === "movieDetail"){
         var directives = {
           title: {
             href: function (params) {
