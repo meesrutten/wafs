@@ -11,5 +11,11 @@
   "devDependencies": {
     "browser-sync": "^2.23.6",
     "gulp": "^3.9.1"
+  },
+  "xo": {
+    "space": "tab"
+  },
+  "dependencies": {
+    "xo": "^0.20.1"
   }
 }
