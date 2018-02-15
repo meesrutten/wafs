@@ -48,8 +48,10 @@
         }
       });
 
-      // Gaat de pagina's vullen met data van de api
-      this.loadPage(route, routeId);
+      // Gaat de pagina's vullen met data van de api behalve op start pagina
+      if(route != "start"){
+        this.loadPage(route, routeId);
+      }
     },
     loadPage(route, routeId){
       // Maakt een api request
@@ -57,6 +59,12 @@
         // Rendert de pagina nadat de api call is gelukt
         xhr.render(route, routeId);
       });
+    },
+    calcReleaseDate(date) {
+      date = date.split("-");
+      date = new Date(date[2], date[1], date[0]);
+      var days = Math.floor((new Date() - date) / 86400000);
+      return days;
     }
   };
 
@@ -99,14 +107,24 @@
         });
       }
 
+      this.data.results = this.data.results.map(function(obj) {
+        console.log(sections.calcReleaseDate(obj.release_date));
+        obj.release_date = sections.calcReleaseDate(obj.release_date);
+        return obj;
+      });
+
       if (route === "popular") {
         var directives = {
           title: {
             href: function(params) {
               return `#movie/${this.id}`;
+            },
+            text: function (params) {
+              return `${this.title} (${this.release_date} days old)`
             }
           }
         };
+
 
         var target = sections.sectionsElements[1].querySelector('#popularMovies');
         // Render Page
