@@ -13,7 +13,7 @@ const App = (function(){
 	}
 	
 	const routes = {
-		init: () => {
+		init() {
 			sections.toggle(startURL)
 			window.addEventListener('hashchange', (event) => {
 				let routeHash = getUrlParams(event.newURL)
@@ -33,7 +33,7 @@ const App = (function(){
 	}
 
 	const sections = {
-		toggle: (route, oldRoute) => {
+		toggle(route, oldRoute)  {
 			if (typeof oldRoute !== 'undefined' && oldRoute !== '/') {
 				let oldActiveSection = document.querySelector(oldRoute)
 				
@@ -67,27 +67,27 @@ const App = (function(){
 	}
 
 	const paths = {
-			'': () => {
+			'': function() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					splash: true
 				}))
 			},
-			'#section_splash': () => {
+			'#section_splash': function() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					splash: true
 				}))
 			},
-			'#section_api': () => {
+			'#section_api': function() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					api: true
 				}))
 			},
-			'#section_test': () => {
+			'#section_test': function() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					test: true
 				}))
 			},
-			'404': () => {
+			'404': function() {
 				document.body.insertAdjacentHTML('beforeend', render(errorPage, {
 					el:true
 				}))
