@@ -28,7 +28,7 @@ npm install
 
 To run the server:
 ```
-parcel index.html
+parcel src/index.html
 ```
 Then navigate to localhost:1234/
 
