@@ -48,8 +48,9 @@ function getApiData() {
 		console.log(pokemon);
 		pokemon.forEach((poke, i) => {
 			i += 1
-			poke.addEventListener('click', function (event) {
+			poke.addEventListener('click', function _func(event) {
 				getPokemon(event, i)
+				this.removeEventListener('click', _func)
 			})
 		})
 	}
