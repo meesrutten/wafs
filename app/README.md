@@ -1,4 +1,4 @@
-# Web app skeleton
+# Web app from scratch
 
 First, check out Parcel Bundler:
 [Parcel Bundler](https://github.com/parcel-bundler/parcel)
