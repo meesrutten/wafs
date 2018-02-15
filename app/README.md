@@ -5,6 +5,8 @@ First, check out Parcel Bundler:
 
 ## Get started
 
+This project currently only works in Firefox Nightly!
+
 ### Install with yarn:
 ```
 yarn global add parcel-bundler
