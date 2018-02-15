@@ -97,23 +97,22 @@
       return promise;
     },
     render(route, apiSearchParm) {
-      // Checking if it a popular Search or Movie detail page
-      if (xhr.filterBadMovies) {
-        // filtering if vote average is kleiner dan 6.5
-        this.data.results = this.data.results.filter(function(obj){
-          if (obj.vote_average > 6.5) {
-            return true;
-          }
-        });
-      }
-
-      this.data.results = this.data.results.map(function(obj) {
-        console.log(sections.calcReleaseDate(obj.release_date));
-        obj.release_date = sections.calcReleaseDate(obj.release_date);
-        return obj;
-      });
-
       if (route === "popular") {
+        // Checking if it a popular Search or Movie detail page
+        if (xhr.filterBadMovies) {
+          // filtering if vote average is kleiner dan 6.5
+          this.data.results = this.data.results.filter(function(obj){
+            if (obj.vote_average > 6.5) {
+              return true;
+            }
+          });
+        }
+
+        this.data.results = this.data.results.map(function(obj) {
+          obj.release_date = sections.calcReleaseDate(obj.release_date);
+          return obj;
+        });
+
         var directives = {
           title: {
             href: function(params) {
@@ -124,7 +123,6 @@
             }
           }
         };
-
 
         var target = sections.sectionsElements[1].querySelector('#popularMovies');
         // Render Page
