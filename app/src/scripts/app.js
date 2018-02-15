@@ -67,27 +67,27 @@ const App = (function(){
 	}
 
 	const paths = {
-			'': function() {
+			''() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					splash: true
 				}))
 			},
-			'#section_splash': function() {
+			'#section_splash'() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					splash: true
 				}))
 			},
-			'#section_api': function() {
+			'#section_api'() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					api: true
 				}))
 			},
-			'#section_test': function() {
+			'#section_test'() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
 					test: true
 				}))
 			},
-			'404': function() {
+			'404'() {
 				document.body.insertAdjacentHTML('beforeend', render(errorPage, {
 					el:true
 				}))
