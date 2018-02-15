@@ -1,4 +1,4 @@
-import * as animations from './magic/index';
+import * as animations from './magic';
 
 function Magic(node, animationName) {
 
