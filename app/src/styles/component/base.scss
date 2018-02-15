@@ -30,9 +30,10 @@
 	}
 	[data-pokemon] {
 		cursor: pointer;
+		color: #FFF;
+		text-transform: capitalize;
 		article {
 			display: flex;
-			
 			padding-left: 1em;
 			border: 1px solid white;
 			figure {

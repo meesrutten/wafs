@@ -22,7 +22,7 @@ function getApiData() {
 
 	function manipulateData(data) {
 		const mappedResult = data.results.map((item) => {
-			return item = item.name.charAt(0).toUpperCase() + item.name.slice(1)
+			return item = item.name
 		})
 
 		injectData(mappedResult)
@@ -34,8 +34,9 @@ function getApiData() {
 			loader[0].remove()
 		}
 		const contentSection = document.querySelector('#section_api')
+		contentSection.insertAdjacentHTML('beforeend', '<ol></ol>')
 		result.forEach((name, i) => {
-			contentSection.insertAdjacentHTML('beforeend', `<p data-pokemon="${name.toLowerCase()}">#${i + 1} ${name}</p>`)
+			contentSection.querySelector('ol').insertAdjacentHTML('beforeend', `<li data-pokemon="${name.toLowerCase()}">${name}</li>`)
 			if (i + 1 === result.length) {
 				console.log('end');
 				addEvents()
