@@ -1,44 +1,52 @@
-function getApiData() {
-	let apiData
-	fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
-		.then(
-			function (response) {
-				if (response.status !== 200) {
-					console.log('Looks like there was a problem. Status Code: ' +
-						response.status);
-					return;
-				}
+import loader from './views/loader'
 
-				// Examine the text in the response
-				response.json().then(function (data) {
-					console.log(data);
-					manipulateData(data)
-				});
-			}
-		)
-		.catch(function (err) {
-			console.log('Fetch Error :-S', err);
-		});
+const MakeApiCall = (function(){
+	'strict mode'
+
+	const createApiCall = async function(URL){
+		const data = JSON.parse(localStorage.getItem(URL)) || await call(URL)
+		//If there is no saved api call url in localstorage
+		if (!localStorage.getItem(URL) === null) {
+			manipulateData(data)
+		}
+		else {
+			localStorage.setItem(URL, JSON.stringify(data));
+			manipulateData(data)
+		}
+	}
+	
+	const call = async function (URL) {
+		const response = await fetch(URL)
+		const data = response.json()
+		return data
+	}
 
 	function manipulateData(data) {
 		const mappedResult = data.results.map((item) => {
 			return item = item.name
 		})
-
-		injectData(mappedResult)
+		injectDataList(mappedResult)
 	}
 
-	function injectData(result) {
+	function injectDataList(result) {
 		const loader = document.querySelectorAll('#loader')
 		if (loader[0]) {
 			loader[0].remove()
 		}
 		const contentSection = document.querySelector('#section_api')
 		contentSection.insertAdjacentHTML('beforeend', '<ol></ol>')
+
+		const fragment = document.createDocumentFragment();
+
 		result.forEach((name, i) => {
-			contentSection.querySelector('ol').insertAdjacentHTML('beforeend', `<li data-pokemon="${name.toLowerCase()}">${name}</li>`)
+			const li = document.createElement('li')
+			li.textContent = name
+			li.setAttribute('data-pokemon', name.toLowerCase())
+			fragment.appendChild(li)
+
 			if (i + 1 === result.length) {
-				console.log('end');
+				console.log('end')
+				contentSection.querySelector('ol').appendChild(fragment)
 				addEvents()
 			}
 		})
@@ -57,10 +65,9 @@ function getApiData() {
 	}
 
 	function getPokemon(event, i) {
-		console.log(i);
-
 		//Prevents extra API calls
 		if (!event.target.querySelectorAll('.pokemon-information')[0]) {
+			event.target.insertAdjacentHTML('beforeend', loader({}))
 			fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
 				.then(
 					function (response) {
@@ -91,25 +98,32 @@ function getApiData() {
 		const height = data.height
 		const sprite = data.sprites.front_default
 
-		elem.insertAdjacentHTML('beforeend', createElement(id, name, weight, height, sprite))
-
 		function createElement(id, name, weight, height, sprite) {
 			return `
-			<article class="pokemon-information">
-				<section>
-					<p>ID: ${id}</p>
-					<p>Weight: ${weight}</p>
-					<p>Height: ${height}</p>
-				</section>
-				<figure>
-					<img src="${sprite}" alt="An image of ${name}">
-				</figure>
-			</article>
+			<a href="https://bulbapedia.bulbagarden.net/wiki/${name}_(Pokémon)">
+				<article class="pokemon-information">
+					<section>
+						<p>ID: ${id}</p>
+						<p>Weight: ${weight}</p>
+						<p>Height: ${height}</p>
+					</section>
+					<figure>
+						<img src="${sprite}" alt="An image of ${name}">
+					</figure>
+				</article>
+			</a>
 			`
 		}
+
+		const loader = document.querySelectorAll('#loader')
+		if (loader[0]) {
+			loader[0].remove()
+		}
+		elem.insertAdjacentHTML('beforeend', createElement(id, name, weight, height, sprite))
 	}
+	return {
+		createApiCall
+	}
+})()
 
-	return ''
-}
-
-export default getApiData
+export default MakeApiCall

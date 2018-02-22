@@ -1,5 +1,5 @@
 import header from './header'
-import api from './api'
+import splash from './splash'
 
 export default el => 
 	`
@@ -7,13 +7,12 @@ export default el =>
 		<main>
 			${ el.splash ? 
 				`<section id="section_splash" data-section>
-					<h1>Splash</h1>
+					${splash( el )}
 				</section>` 
 				: '' }
 			${ el.api ? 
 				`<section id="section_api" data-section>
 					<h1>api</h1>
-					${ api( el ) }
 				</section>` 
 				: '' }
 			${ el.test ? 

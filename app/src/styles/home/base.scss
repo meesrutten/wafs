@@ -18,18 +18,49 @@ html {
     font: var(--font-stack);
     /* Sets standard font-size */
     font-size: 1rem;
+        color: #FFF;
+
 }
 
 html, body {
     margin: 0;
-	padding: 0;
 }
 
-body {
-    margin: 0;
-    padding: 0;
+a {
+    color: inherit;
+    border-bottom: 1px solid #fff;
+}
+
+code {
+    border: 1px solid grey;
+    border-radius: .1em;
+    padding: .35em;
+    color: #FFC100;
+    background-color:rgba(25, 62, 255, .4);
 }
 
 main {
-	margin-top: 5rem;
+    background-color: #3d50b4;
+}
+
+//warning
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 20em;
+    min-width: 20em;
+    background-color: #FFF;
+    color:rgba(25, 62, 255, 1);
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+    .warning {
+        text-align: center;
+        font-size: 2em;
+    }
 }

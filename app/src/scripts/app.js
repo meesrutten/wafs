@@ -1,13 +1,16 @@
 import index from './views/index'
 import errorPage from './views/404'
-
 import Magic from './magic.js'
+import MakeApiCall from './api'
+
 const App = (function(){
 	'strict mode'
 	
+	//sets the start url to splashpage or previous hash
 	let startURL
 	window.location.hash.length >= 1 ? startURL = window.location.hash : startURL = '#section_splash'
 	
+	//Made this init so I won't have to return const routes
 	const init = () => {
 		routes.init()
 	}
@@ -25,6 +28,7 @@ const App = (function(){
 
 				sections.toggle(routeHash, oldRouteHash)
 			})
+			
 		},
 	}
 	const getUrlParams = (search) => {
@@ -52,8 +56,14 @@ const App = (function(){
 				}
 			}
 
+			//Checks the hash and sets the content
 			if (route in paths) {
 				paths[window.location.hash]()
+				//removes loader
+				const loader = document.querySelectorAll('#loader')
+				if (loader[0]) {
+					loader[0].remove()
+				}
 			}
 			else {
 				paths['404']()
@@ -61,8 +71,11 @@ const App = (function(){
 			}
 
 			const newActiveSection = document.querySelector(route)
-			const show = new Magic(newActiveSection, 'show');
-			show.play();
+			const show = new Magic(newActiveSection, 'show')
+			show.play()
+			show.onfinish = () => {
+				newActiveSection.style = "max-height: 100%; overflow: auto;"
+			}
 		}
 	}
 
@@ -78,9 +91,18 @@ const App = (function(){
 				}))
 			},
 			'#section_api'() {
-				document.body.insertAdjacentHTML('beforeend', render(index, {
-					api: true
-				}))
+				const addElements = new Promise( function (resolve, reject) {
+						document.body.insertAdjacentHTML('beforeend', render(index, {
+							api: true
+						}))
+						if(document.querySelectorAll('#section_api')[0]) {
+							console.log(document.querySelectorAll('#section_api')[0]);
+							resolve()
+							MakeApiCall.createApiCall('https://pokeapi.co/api/v2/pokemon/?limit=151')
+						}
+					}).then( () => {
+					
+				});
 			},
 			'#section_test'() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {

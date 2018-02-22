@@ -1,37 +1,49 @@
 [data-section] {
-	// display: flex;
-	// justify-content: center;
-	// align-items: center;
-	
-	overflow-y: scroll;
 
 	min-height: 100vh;
 	height: auto;
 	width: 100%;
 	
 	padding: 2rem;
+	padding-top: 5rem;
 
 	background-color: rgba(61, 80, 180, 1);
-	
 	// position: fixed;
 	// z-index: -1;
 	
-	transform: scale(0); 
+	transform: scale(0) translateY(-10%); 
 	opacity: 0;
-	transform-origin: 50% 50%;
+	transform-origin: 5% 0;
 
-	will-change: auto;
+	overflow: hidden;
+
+	// will-change: auto;
 	h1 {
 		font-size: 4rem;
 		color: #fff;
 	}
+	h2, h3, h4, h5, h6 {
+		color: #ddd;
+	}
 	p {
 		color: #fff;
+	}
+	.warning {
+		color: #FFC100;
 	}
 	[data-pokemon] {
 		cursor: pointer;
 		color: #FFF;
 		text-transform: capitalize;
+		max-width: -moz-fit-content;
+		max-width: fit-content;
+		&:hover {
+			border-bottom: 1px solid #FFF;
+		}
+		a {
+			text-decoration: none;
+			color: initial;
+		}
 		article {
 			display: flex;
 			padding-left: 1em;
@@ -44,6 +56,9 @@
 					height: auto;
 				}
 			}
+		}
+		svg {
+			display: block;
 		}
 	}
 

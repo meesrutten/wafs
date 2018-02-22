@@ -1,7 +1,7 @@
 console.log('bundle.js - test');
 
-import app from './app.js'
-import router from './router.js'
+import servicehandler from './servicehandler'
+import App from './app.js'
 
 // // Import a module using CommonJS syntax
 // const dep = require('./path/to/dep');
