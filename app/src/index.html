@@ -28,6 +28,9 @@
         if (window.KeyframeEffect === undefined) {
             document.querySelector('#browser-warning').style.display = "flex"
         }
+        else {
+            document.querySelector('#browser-warning').remove()
+        }
     </script>
     <script async defer type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=WebAnimations"></script>
     <script async defer src="./scripts/bundle.js"></script>
