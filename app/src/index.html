@@ -19,10 +19,16 @@
     <link rel="stylesheet" href="./styles/main.scss">
 </head>
 <body>
-    <div class="center">
+    <div class="center" id="browser-warning">
         <p class="warning">This project currently only works in Firefox Nightly</p>
         <a href="https://www.mozilla.org/nl/firefox/channel/desktop/">Download Firefox Nightly</a>
     </div>
+    <script>
+        //Fixes browser warning
+        if (window.KeyframeEffect === undefined) {
+            document.querySelector('#browser-warning').style.display = "flex"
+        }
+    </script>
     <script async defer type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=WebAnimations"></script>
     <script async defer src="./scripts/bundle.js"></script>
 </body>

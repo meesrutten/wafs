@@ -45,6 +45,7 @@ main {
 
 //warning
 .center {
+
     position: absolute;
     left: 50%;
     top: 50%;
@@ -54,7 +55,7 @@ main {
     background-color: #FFF;
     color:rgba(25, 62, 255, 1);
 
-    display: flex;
+    display: none;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
