@@ -18,12 +18,11 @@
 
     <link rel="stylesheet" href="./styles/main.scss">
 </head>
-<body>
-    <div class="center" id="browser-warning">
-        <p class="warning">This project currently only works in Firefox Nightly</p>
-        <a href="https://www.mozilla.org/nl/firefox/channel/desktop/">Download Firefox Nightly</a>
-    </div>
-    <script>
+<body>    
+    <script async defer type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/641/web-animations-next.min.js"></script>
+    <script async defer type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=WebAnimations"></script>
+    
+    <!-- <script async defer>
         //Fixes browser warning
         if (window.KeyframeEffect === undefined) {
             document.querySelector('#browser-warning').style.display = "flex"
@@ -31,10 +30,8 @@
         else {
             document.querySelector('#browser-warning').remove()
         }
-    </script>
-    
-    <script async defer type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/641/web-animations-next.min.js"></script>
-    <script async defer type="text/javascript" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=WebAnimations"></script>
+    </script> -->
+
     <script async defer src="./scripts/bundle.js"></script>
 </body>
 </html>

@@ -11,14 +11,14 @@ const App = (function(){
 	window.location.hash.length >= 1 ? startURL = window.location.hash : startURL = '#section_splash'
 	
 	//Made this init so I won't have to return const routes
-	const init = () => {
+	const init = function() {
 		routes.init()
 	}
 	
 	const routes = {
 		init() {
 			sections.toggle(startURL)
-			window.addEventListener('hashchange', (event) => {
+			window.addEventListener('hashchange', function(event) {
 				let routeHash = getUrlParams(event.newURL)
 				let oldRouteHash = getUrlParams(event.oldURL)
 				
@@ -31,13 +31,13 @@ const App = (function(){
 			
 		},
 	}
-	const getUrlParams = (search) => {
+	const getUrlParams = function(search) {
 		let hashes = search.slice(search.lastIndexOf('#'))
 		return hashes
 	}
 
 	const sections = {
-		toggle(route, oldRoute)  {
+		toggle(route, oldRoute) {
 			if (typeof oldRoute !== 'undefined' && oldRoute !== '/') {
 				let oldActiveSection = document.querySelector(oldRoute)
 				
@@ -116,7 +116,7 @@ const App = (function(){
 			}
 	} 
 
-	const render = (html, obj) => {
+	const render = function(html, obj) {
 		return html( obj )
 	}
 

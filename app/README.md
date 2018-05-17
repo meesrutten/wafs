@@ -21,6 +21,7 @@ First, check out Parcel Bundler:
 [Parcel Bundler](https://github.com/parcel-bundler/parcel)
 
 ## Get started
+First clone the repo with `git clone https://github.com/meesrutten/wafs/`
 ### Install
 install with Yarn
 ```
@@ -94,8 +95,6 @@ and `insertAdjacentHTML` for templating
 - App.js is messy and big
 - API.js is messy and big
 - Feedback to user when using api
-
-
 
 TO DO:
 

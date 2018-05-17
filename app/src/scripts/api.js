@@ -54,7 +54,7 @@ const MakeApiCall = (function(){
 
 	function addEvents() {
 		const pokemon = document.querySelectorAll('[data-pokemon]')
-		console.log(pokemon);
+
 		pokemon.forEach((poke, i) => {
 			i += 1
 			poke.addEventListener('click', function _func(event) {
@@ -62,6 +62,8 @@ const MakeApiCall = (function(){
 				this.removeEventListener('click', _func)
 			})
 		})
+		
+		createSearchElement()
 	}
 
 	function getPokemon(event, i) {
@@ -120,7 +122,45 @@ const MakeApiCall = (function(){
 			loader[0].remove()
 		}
 		elem.insertAdjacentHTML('beforeend', createElement(id, name, weight, height, sprite))
+
 	}
+
+	function createSearchElement(){
+		const elem = document.querySelector('#section_api');
+		const input = document.createElement('input');
+		input.setAttribute('data-filter', 'pokemon');
+		input.setAttribute('data-filters', 'ol [data-pokemon]');
+		input.setAttribute('placeholder', 'Search here');
+
+		input.addEventListener('input', filterElements);
+
+		if(!document.querySelectorAll('[data-filter]')[0]) {
+			elem.insertBefore(input, elem.firstChild);
+		}
+	}
+
+	function filterElements(){
+		const searchValue = event.target.value;
+		const filterName = event.target.getAttribute('data-filter');
+		const filterElement = event.target.getAttribute('data-filters');
+		const elements = document.querySelectorAll(`[data-${filterName}]`);
+
+		const searchResult = Array.from(elements).filter( (item) => {
+			const dataType = item.getAttribute(`data-${filterName}`);
+			if ( dataType.includes(searchValue) || item.textContent.includes(searchValue) ) {
+				console.log(item);
+				return item;
+			}
+		});
+
+		elements.forEach( (elem) => {
+			elem.classList.add('hidden');
+		})
+		searchResult.forEach( (item) => {
+			item.classList.toggle('hidden');
+		})
+	}
+
 	return {
 		createApiCall
 	}
