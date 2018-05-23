@@ -104,9 +104,9 @@ const App = (function(){
 					
 				});
 			},
-			'#section_test'() {
+			'#section_diagram'() {
 				document.body.insertAdjacentHTML('beforeend', render(index, {
-					test: true
+					diagram: true
 				}))
 			},
 			'404'() {

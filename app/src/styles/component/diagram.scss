@@ -1,0 +1,25 @@
+.diagram {
+	display: grid;
+	grid-gap: 3rem calc(1vw + 2rem);
+	grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+
+	&_box{
+		border: 2px solid white;
+		padding: .5rem;
+		border-radius: .25rem;
+		h2 {
+			margin: 0;
+			border-bottom: 1px solid white;
+		}
+		p {
+			display: flex;
+			span {
+				margin-left: auto;
+			}
+		}
+	}
+}
+.diagram-image {
+	display: block;
+	margin: 3rem 0;
+}

@@ -1,5 +1,6 @@
 import header from './header'
 import splash from './splash'
+import diagram from './diagram'
 
 export default el => 
 	`
@@ -15,9 +16,10 @@ export default el =>
 					<h1>api</h1>
 				</section>` 
 				: '' }
-			${ el.test ? 
-				`<section id="section_test" data-section>
-					<h1>test</h1>
+			${ el.diagram ? 
+				`<section id="section_diagram" data-section>
+					<h1>Diagrams</h1>
+					${diagram( el )}
 				</section>` 
 				: '' }
 		</main>
