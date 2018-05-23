@@ -1,10 +1,15 @@
 const createSortElement = function () {
 	const elem = document.querySelector('#section_api');
-	// input.setAttribute('data-sort', 'pokemon');
 	const elements = document.querySelectorAll('ol [data-pokemon]');
-	// input.setAttribute('placeholder', 'Search here');
 
-	elem.insertAdjacentHTML('afterbegin', `
+	//Adds a number to the elements
+	elements.forEach( (element, i) => {
+		i++
+		element.setAttribute('data-number', i);
+	})
+
+	if (!document.querySelectorAll('[data-sort]')[0]) {
+		elem.querySelector('h1').insertAdjacentHTML('afterend', `
 			<label for="sort" class="label">Sort by
 				<select name="sort" data-sort="pokemon" data-sorts="ol [data-pokemon]"> <!--Supplement an id here instead of using 'text'-->
 					<option selected value="Number">Number</option>
@@ -14,29 +19,13 @@ const createSortElement = function () {
 				</select>
 			</label>
 				`
-	);
+		);
+	}
 
 	const select = document.querySelector('[data-sort]');
 
 	select.addEventListener('change', sortElements);
 
-	//Adds a number to the elements
-	elements.forEach( (element, i) => {
-		i++
-		element.setAttribute('data-number', i);
-	})
-
-	if (!document.querySelectorAll('[data-sort]')[0]) {
-		elem.insertAdjacentHTML('afterbegin', `
-			<select name="sort" data-sort="pokemon" data-sorts="ol [data-pokemon]"> <!--Supplement an id here instead of using 'text'-->
-				<option selected value="Number">Number</option>
-				<option value="Alphabetical">Alphabetical</option>
-				<option value="Number reverse">Number reverse</option>
-				<option value="Alphabetical reverse">Alphabetical reverse</option>
-			</select>
-				`
-		);
-	}
 }
 
 const sortElements = function () {

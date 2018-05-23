@@ -90,25 +90,14 @@ and `insertAdjacentHTML` for templating
 
 ## Feature wishlist
 - I would like to add something to reduce renderblocking JS. 
-- Add search option
-- Create overall styling
-- App.js is messy and big
-- API.js is messy and big
 - Feedback to user when using api
 
 TO DO:
 
 - Onderzoek nog niet klaar
-- Alle code leeft in de window scope
 - Readme + 2x flow, API beschrijving
 - Object model diagram geeft inzicht in opzet van de code
 - interaction flow diagram laat zien goe de gebruiker interacteert met de app en de app views genereert
-- data wordt gemanipuleerd met filter, sort, map, reduce
-- app / api object rommelig/ teveel functionaliteit
-- onderverdelen in modules? 
-- feedback geven aan gebruiker kan beter 
-- closure better uitleggen; 
-- filteren vanuit interface
 
 
 Het betreft een SPA die online gehost is (github pages)

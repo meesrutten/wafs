@@ -14,7 +14,7 @@ const createSearchElement = function() {
 	label.appendChild(input);
 
 	if (!document.querySelectorAll('[data-filter]')[0]) {
-		elem.insertBefore(label, elem.firstChild);
+		elem.insertBefore(label, elem.children[1]);
 	}
 }
 
