@@ -93,7 +93,6 @@ and `insertAdjacentHTML` for templating
 In the Actor Diagram you can see an overview of all the methods and functions that could be called and where they belong in the app.
 
 <img src="https://github.com/meesrutten/wafs/blob/master/src/assets/images/actor-diagram.png">
-<img src="https://github.com/meesrutten/wafs/blob/master/dist/2ce11420ddc8f796dba0a8f3c2d57c19.png">
 
 ## Flow Diagram
 These diagrams display the flow of the application.
