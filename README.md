@@ -66,6 +66,10 @@ For more information about the usage of this API read the
 
 > There is, however, a daily rate limit of 300 requests per resource per IP address. So a single IP address can call the bulbasaur resource 300 times a day. Not 300 requests across the entire dataset! This is to stop our database from falling over under heavy load.
 
+There is no api key requirement.
+But there is a limit of 300 calls for a specific resource.
+Which this app will never meet if it uses [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+
 ## Principles and best practices
 For this project I used:
 - [Parcel](https://parceljs.org/)
@@ -88,6 +92,7 @@ and `insertAdjacentHTML` for templating
 ## Actor Diagram
 In the Actor Diagram you can see an overview of all the methods and functions that could be called and where they belong in the app.
 
+<img src="https://github.com/meesrutten/wafs/blob/master/src/assets/images/actor-diagram.png">
 <img src="https://github.com/meesrutten/wafs/blob/master/dist/2ce11420ddc8f796dba0a8f3c2d57c19.png">
 
 ## Flow Diagram
