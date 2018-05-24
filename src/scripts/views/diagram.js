@@ -64,6 +64,15 @@ export default el => `
 			</p>
 		</div>
 		<div class="diagram_box">
+			<h2>Sort</h2>
+			<p>createSortElement:
+				<span>function()</span>
+			</p>
+			<p>sortElements:
+				<span>function()</span>
+			</p>
+		</div>
+		<div class="diagram_box">
 			<h2>getDetails</h2>
 			<p>getPokemon:
 				<span>function()</span>
@@ -74,4 +83,6 @@ export default el => `
 		</div>
 	</section>
 	<img class="diagram-image" src="./dist/2ce11420ddc8f796dba0a8f3c2d57c19.png" alt="">
+	<img class="diagram-image" src="./dist/21bb03cbe605a76234cbca85d0fd485b.png" alt="">
+	<img class="diagram-image" src="./dist/b28ed9ead43afa9047d7c3ff06a3b4c6.png" alt="">
 `

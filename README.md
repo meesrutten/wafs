@@ -86,27 +86,21 @@ and `insertAdjacentHTML` for templating
 ### Magic Library
 
 ## Actor Diagram
+In the Actor Diagram you can see an overview of all the methods and functions that could be called and where they belong in the app.
+
+<img src="https://github.com/meesrutten/wafs/blob/master/dist/2ce11420ddc8f796dba0a8f3c2d57c19.png">
+
 ## Flow Diagram
+These diagrams display the flow of the application.
+
+### Routing flow
+This diagram shows what happens when a client navigates to a page.
+<img src="https://github.com/meesrutten/wafs/blob/master/dist/b28ed9ead43afa9047d7c3ff06a3b4c6.png">
+
+### API section flow
+This diagram shows what happens when a client navigates to the API page.
+<img src="https://github.com/meesrutten/wafs/blob/master/dist/21bb03cbe605a76234cbca85d0fd485b.png">
 
 ## Feature wishlist
 - I would like to add something to reduce renderblocking JS. 
 - Feedback to user when using api
-
-TO DO:
-
-- Onderzoek nog niet klaar
-- Readme + 2x flow, API beschrijving
-- Object model diagram geeft inzicht in opzet van de code
-- interaction flow diagram laat zien goe de gebruiker interacteert met de app en de app views genereert
-
-
-Het betreft een SPA die online gehost is (github pages)
-Readme.md op GH met 2x flow, api beschr.    Het object model diagram geeft inzicht in de opzet van de code    
-Het interaction flow diagram laat zien hoe de gebruiker interacteert met de app en de app views genereert    
-Overview, detail paginas    
-De code is modulair opgezet (met modules of iig object lits)    
-Externe data wordt middels een templating engine naar HTML gerendered    
-De data wordt gemanipuleerd met filter/sort/map/reduce    
-Er is feedback naar de user over het laden van data en wat gebeurt er als API offline gaat    Student toont begrip van: object, method, callback, this, context, scope, closure, module, strict mode,code flow    
-De code volgt OOP of functional principes en de student kan pattern keuze verdedigen        Alles tot hier  voor voldoende    
-Ophoging voor bijv. Complexiteit, Goede uitleg of beschrijving, zinvolle applicatie, slimme code structuur, goede design patterns, lazy loading, ES6, web worker, classes, hulp aan andere studenten (edited)
